@@ -1,17 +1,16 @@
 package jsonrpc
 
-import "encoding/json"
-
 type Response struct {
-	ID      ID              `json:"id,omitempty"`
-	JsonRPC string          `json:"jsonRpc,omitempty"`
-	Result  json.RawMessage `json:"result,omitempty"`
-}
+	// ID is the unique ID of the request that caused this response.
+	ID ID `json:"id,omitempty"`
 
-func (r Response) Text() string {
-	return string(r.Result)
-}
+	// JsonRPC is a string specifying the version of the JSON-RPC protocol which
+	// must be exactly "2.0".
+	JsonRPC string `json:"jsonrpc,omitempty"`
 
-func (r Response) Unmarshal(dst any) error {
-	return json.Unmarshal(r.Result, dst)
+	// Result is the result of the request.
+	Result *Result `json:"result,omitempty"`
+
+	// Error is the error that occurred during the request.
+	Error *Error `json:"error,omitempty"`
 }

@@ -1,8 +1,17 @@
 package jsonrpc
 
+import "fmt"
+
 type Error struct {
 	Code    ErrorCode `json:"code,omitempty"`
 	Message string    `json:"message,omitempty"`
+}
+
+var _ error = (*Error)(nil)
+
+// Error returns the error string.
+func (err Error) Error() string {
+	return fmt.Sprintf("%d: %s", err.Code, err.Message)
 }
 
 type ErrorCode int

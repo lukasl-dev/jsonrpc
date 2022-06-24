@@ -1,6 +1,7 @@
 package jsonrpc
 
 type Request struct {
+	// ID is the unique ID that identifies the request.
 	ID ID `json:"id,omitempty"`
 
 	// JsonRPC is a string specifying the version of the JSON-RPC protocol which
