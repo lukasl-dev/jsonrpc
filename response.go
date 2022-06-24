@@ -1,6 +1,9 @@
 package jsonrpc
 
-import "net/http"
+import (
+	"encoding/json"
+	"net/http"
+)
 
 type Response struct {
 	// ID is the unique ID of the request that caused this response.
@@ -11,7 +14,7 @@ type Response struct {
 	JsonRPC string `json:"jsonrpc,omitempty"`
 
 	// Result is the result of the request.
-	Result *Result `json:"result,omitempty"`
+	Result json.RawMessage `json:"result,omitempty"`
 
 	// Error is the error that occurred during the request.
 	Error *Error `json:"error,omitempty"`
