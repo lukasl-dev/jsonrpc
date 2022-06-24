@@ -1,5 +1,7 @@
 package jsonrpc
 
+import "net/http"
+
 type Response struct {
 	// ID is the unique ID of the request that caused this response.
 	ID ID `json:"id,omitempty"`
@@ -13,4 +15,12 @@ type Response struct {
 
 	// Error is the error that occurred during the request.
 	Error *Error `json:"error,omitempty"`
+
+	// hr is the underlying HTTP response.
+	hr *http.Response
+}
+
+// HTTP returns the underlying HTTP response.
+func (resp Response) HTTP() *http.Response {
+	return resp.hr
 }
